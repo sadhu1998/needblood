@@ -665,7 +665,7 @@ export default {
   border-radius: 10px;
 }
 .data { width: 120px; }
-/* #app,html {
+#app,html {
   display: flex;
   align-items: center;
   justify-content: center;  
@@ -678,7 +678,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-} */
+}
 
 .otp-input {
   width: 40px;
