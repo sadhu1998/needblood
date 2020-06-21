@@ -91,5 +91,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "proxy": {
+    "/api": {
+      "target": "http://35.238.212.200:8080"
+  }
+}
 }
