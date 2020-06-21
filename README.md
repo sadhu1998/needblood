@@ -1,4 +1,4 @@
-# sample-project
+# DonorNearMe
 
 > A Vue.js project
 
