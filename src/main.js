@@ -6,6 +6,7 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import InfoPage from './infopage/index'
 import Login from './Login/index'
+import store from './store/store'
 
 Vue.use(VueRouter);
 Vue.use(iView);
@@ -25,6 +26,7 @@ Vue.use(ElementUI)
 /* eslint-disable no-new*/
 
 new Vue({
+  store,
   router,
   render: h => h(App),
 }).$mount('#app')

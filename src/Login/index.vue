@@ -2,11 +2,6 @@
       <div id="app">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
-    <div class="bg-one">
-      <div class="bg-text"> 
-        <h1 class="title">DONOR NEAR ME</h1>
-      </div>
-    </div>
       <div id="tabs" class="container">
 
     <div class="tabs">
@@ -387,6 +382,8 @@ export default {
               return false
           }
           if (_data.data.status) {
+            this.$store.state.userData = _data.data
+            console.log(this.$store.state.userData)
             this.clearSigninForm()  
             this.$router.push('/infopage')
           }
@@ -532,20 +529,6 @@ export default {
    color: black;
 
 }
-.bg-text {
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
-  color: white;
-  font-weight: bold;
-  position: absolute;
-  top: 7%;
-  left: 30%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 50%;
-  padding: 25px;
-  text-align: center;
-}
  .label-text .el-form-item__label {
     text-align: right;
     vertical-align: middle;
@@ -616,7 +599,7 @@ export default {
 .button:focus { outline:0; }
 .container { 
   position: absolute;
-  top:-3%;
+  top:8%;
   right:5%;
   left:60%;
   max-width: 620px; 

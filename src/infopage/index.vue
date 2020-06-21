@@ -2,7 +2,6 @@
     <div>
         <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
         <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
-        <h1>This is the 2nd page</h1>
         <el-card shadow="hover" class="field-card">
           <el-form>  
             <el-form-item label="Blood Group:" prop="bloodgroup" class="label-text">
@@ -69,6 +68,8 @@
           <button class="button" @click="getDetails">search</button>
         </el-card>
         <el-card shadow="hover" class="table-card">
+                <span v-if="!showTable">Image here</span>
+                <div v-if="showTable">
                 <span class="text-message" @click="optionalMessage">Leave a Message (optional)</span><br>
                 <el-input 
                 v-if="optionalFlag"
@@ -99,11 +100,11 @@
                     <td>
                         <span class="contact-donor" :key="index" v-if="!sentFlag[index]" @click="requestDonor(row,index)">Contact</span>
                         <span class="sent-donor" :key="index" v-if="sentFlag[index]">Sent Successfully!</span>
-                        <!-- {{sentFlag[index]}} {{index}} -->
                     </td>
                     </tr>
                 </tbody>
             </table>
+                </div>
         </el-card>
     </div>
 </template>
@@ -121,6 +122,7 @@ import Factory from '../libs/factory.js'
 export default {
     data () {
         return {
+            showTable : false,
             optionalFlag : false,
             messageText : '',
             textarea : '',
@@ -150,6 +152,7 @@ export default {
     async created () {
         this.getCountries()
         this.getBloodgroupList()
+        this.$store.state.userName = this.$store.state.userData.username
     },
     methods : {
         async requestDonor (row,index) {
@@ -234,6 +237,7 @@ export default {
             let _data = await Factory.getService('http://35.238.212.200:8080/getdetails/' + this.fieldData.country + '/' + this.fieldData.state + '/' + this.fieldData.district + '/' + this.fieldData.city + '/' + this.fieldData.town + '/' + this.fieldData.bloodgroup)
             console.log(_data)
             this.rows = _data.data
+            this.showTable = true
         }
         
     }

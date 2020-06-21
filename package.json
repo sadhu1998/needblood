@@ -21,7 +21,8 @@
     "vue": "^2.5.2",
     "vue-good-table": "^2.19.3",
     "vue-router": "^3.0.1",
-    "vuetable-2": "^2.0.0-beta.4"
+    "vuetable-2": "^2.0.0-beta.4",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.13.1",
