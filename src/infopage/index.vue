@@ -5,7 +5,7 @@
         <el-card shadow="hover" class="field-card">
           <el-form>  
             <el-form-item label="Blood Group:" prop="bloodgroup" class="label-text">
-                    <el-select v-model="fieldData.bloodgroup" placeholder="Your blood group is" style="width:100%">
+                    <el-select v-model="fieldData.bloodgroup" placeholder="Your blood group is" style="width:100%" class="width-style">
                     <el-option
                         v-for="item in options"
                         :key="item"
@@ -15,7 +15,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="Country" prop="country" class="label-text">
-                    <el-select v-model="fieldData.country" filterable @change="changeCountry" placeholder="Select Country" style="width:100%">
+                    <el-select v-model="fieldData.country" filterable @change="changeCountry" placeholder="Select Country" style="width:100%" class="width-style">
                     <el-option
                         v-for="item in countries"
                         :key="item"
@@ -25,7 +25,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="State" prop="state" class="label-text">
-                    <el-select v-model="fieldData.state" filterable @change="changeState" placeholder="Select State" style="width:100%">
+                    <el-select v-model="fieldData.state" filterable @change="changeState" placeholder="Select State" style="width:100%" class="width-style">
                     <el-option
                         v-for="item in states"
                         :key="item"
@@ -35,7 +35,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="District" prop="district" class="label-text">
-                    <el-select v-model="fieldData.district" filterable @change="changeDistrict" placeholder="Select district" style="width:100%">
+                    <el-select v-model="fieldData.district" filterable @change="changeDistrict" placeholder="Select district" style="width:100%" class="width-style">
                     <el-option
                         v-for="item in districts"
                         :key="item"
@@ -45,7 +45,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="City" prop="city" class="label-text">
-                    <el-select v-model="fieldData.city" filterable @change="changeCity" placeholder="Select City" style="width:100%">
+                    <el-select v-model="fieldData.city" filterable @change="changeCity" placeholder="Select City" style="width:100%" class="width-style">
                     <el-option
                         v-for="item in cities"
                         :key="item"
@@ -55,7 +55,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="Town" prop="town" class="label-text">
-                    <el-select v-model="fieldData.town" filterable placeholder="Select Town" style="width:100%">
+                    <el-select v-model="fieldData.town" filterable placeholder="Select Town" style="width:100%" class="width-style">
                     <el-option
                         v-for="item in towns"
                         :key="item"
@@ -152,7 +152,11 @@ export default {
     async created () {
         this.getCountries()
         this.getBloodgroupList()
-        this.$store.state.userName = this.$store.state.userData.username
+        console.log(this.$store.state.userData)
+        this.$store.state.userName = localStorage.getItem('username')
+        
+    },
+    async mounted () {
     },
     methods : {
         async requestDonor (row,index) {
@@ -255,7 +259,7 @@ export default {
     top: 100px;
 }
 .field-card {
-    width: 26%;
+    width: 20%;
     position: absolute;
     left: 15px;
     top: 100px;
@@ -264,11 +268,11 @@ export default {
     text-align: right;
     vertical-align: middle;
     float: left;
-    font-size: 18px;
-    font-weight:500;
+    font-size: 14px;
+    font-weight:600;
     color:black;
     line-height: 40px;
-    padding: 0 6px 0 0;
+    padding: 0 0 0 0;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
@@ -284,13 +288,13 @@ export default {
   color: #fff;
   padding-top: 5px;
   padding-bottom: 25px;
-  width: 150px;
+  width: 100px;
   text-align: center;
   transition-duration: 0.4s;
   overflow: hidden;
   border-radius: 4px;
   height: 3px;
-  margin-left: 75px;
+  margin-left: 55px;
 }
 .button:hover {
   background: #fff;
@@ -357,6 +361,9 @@ table tbody tr:nth-child(2n) td {
 }
 .sent-donor {
     color: green;
+}
+.width-style .el-input__inner{
+   height: 30px;
 }
 
 </style>

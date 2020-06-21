@@ -382,8 +382,8 @@ export default {
               return false
           }
           if (_data.data.status) {
-            this.$store.state.userData = _data.data
-            console.log(this.$store.state.userData)
+            localStorage.setItem('email_id',_data.data.mailid)
+            localStorage.setItem('username',_data.data.username)
             this.clearSigninForm()  
             this.$router.push('/infopage')
           }
