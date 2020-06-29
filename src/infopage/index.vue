@@ -1,71 +1,109 @@
 <template>
+<v-app>
     <div>
         <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
         <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">    
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://cdn.lineicons.com/1.0.1/LineIcons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="app">
+  <div class="navbar">
+    <div class="colum">
+        <div class="logo">
+           <img src="../assets/dnm.png" alt="img" id="logo" @click="gotohome"> 
+        </div>
+        <div class="home" >
+          <i class="fa fa-home" @mouseover="changeColorhome" @mouseleave="removeColorhome" v-bind:style=styleColorhome id="home"></i>
+          <h4 style="margin-top: 8px; color: black;position:absolute;bottom:0%;right:58%;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 15px;font-weight: 400;"> HOME </h4>
+        </div>
+
+      <div class="check">
+        <i class="fa fa-question-circle" @mouseover="changeColorcheck" @mouseleave="removeColorcheck" v-bind:style=styleColorcheck id="check"></i>
+         <h4 style="margin-top: 8px; color: black;position:absolute;bottom:0%;right:50%;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 15px;font-weight: 400;"> ABOUT </h4>
+      </div>
+
+      <div class="coin" >
+        <i class="fa fa-thumbs-up" @mouseover="changeColorcoin" @mouseleave="removeColorcoin" v-bind:style=styleColorcoin id="coin"></i>
+         <h4 style="margin-top: 8px; color: black;position:absolute;bottom:0%;right:43%;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 15px;font-weight: 400;">HELP </h4>
+      </div>
+      
+      <div class="user" >
+        <i class="fa fa-user" style="font-size:36px;color:black" id="user"></i>
+        <h4 style="margin-top: 10px; color: black;position:absolute;right:9%;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 18px;font-weight: 400;"> {{$store.state.userName}} </h4>
+      </div>
+      <v-menu offset-y min-width="200px">
+      <template v-slot:activator="{ on, attrs }">
+         <i class='fa fa-angle-down' style='font-size:30px;color:black' id="dropdowns" v-on="on" v-bind="attrs"></i>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          @click="clickItem(item,index)"
+        >
+          <v-list-item-title>
+          <span :class="item.icon" style="font-size:20px;color:black"></span>    
+          {{ item.title }}
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+    </div>
+  </div>
+</div>   
         <el-card shadow="hover" class="field-card">
-          <el-form>  
-            <el-form-item label="Blood Group:" prop="bloodgroup" class="label-text">
-                    <el-select v-model="fieldData.bloodgroup" placeholder="Your blood group is" style="width:100%" class="width-style">
-                    <el-option
-                        v-for="item in options"
-                        :key="item"
-                        :label="item"
-                        :value="item">
-                    </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="Country" prop="country" class="label-text">
-                    <el-select v-model="fieldData.country" filterable @change="changeCountry" placeholder="Select Country" style="width:100%" class="width-style">
-                    <el-option
-                        v-for="item in countries"
-                        :key="item"
-                        :label="item"
-                        :value="item">
-                    </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="State" prop="state" class="label-text">
-                    <el-select v-model="fieldData.state" filterable @change="changeState" placeholder="Select State" style="width:100%" class="width-style">
-                    <el-option
-                        v-for="item in states"
-                        :key="item"
-                        :label="item"
-                        :value="item">
-                    </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="District" prop="district" class="label-text">
-                    <el-select v-model="fieldData.district" filterable @change="changeDistrict" placeholder="Select district" style="width:100%" class="width-style">
-                    <el-option
-                        v-for="item in districts"
-                        :key="item"
-                        :label="item"
-                        :value="item">
-                    </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="City" prop="city" class="label-text">
-                    <el-select v-model="fieldData.city" filterable @change="changeCity" placeholder="Select City" style="width:100%" class="width-style">
-                    <el-option
-                        v-for="item in cities"
-                        :key="item"
-                        :label="item"
-                        :value="item">
-                    </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="Town" prop="town" class="label-text">
-                    <el-select v-model="fieldData.town" filterable placeholder="Select Town" style="width:100%" class="width-style">
-                    <el-option
-                        v-for="item in towns"
-                        :key="item"
-                        :label="item"
-                        :value="item">
-                    </el-option>
-                    </el-select>
-                </el-form-item>
-          </el-form>
-          <button class="button" @click="getDetails">search</button>
+            <v-form
+            ref="signupForm"
+          >
+            <v-row align="center" style="width:85%;margin-left:20px">
+                <v-select
+                  v-model="bloodgroup"
+                  :items="options"
+                  :rules="[v => !!v || 'Bloodgroup is required']"
+                  label="Blood Group"
+                >
+                </v-select>
+                <v-select
+                v-model="country"
+                :items="countries"
+                :rules="[v => !!v || 'Country is required']"
+                label="Country"
+                @change="changeCountry"
+              ></v-select>
+              <v-select
+                v-model="state"
+                :items="states"
+                :rules="[v => !!v || 'State is required']"
+                label="State"
+                @change="changeState"
+              ></v-select>
+               <v-select
+                v-model="district"
+                :items="districts"
+                :rules="[v => !!v || 'District is required']"
+                label="District"
+                @change="changeDistrict"
+              ></v-select>
+              <v-select
+                v-model="city"
+                :items="cities"
+                :rules="[v => !!v || 'City is required']"
+                label="City"
+                @change="changeCity"
+              ></v-select>
+              <v-select
+                v-model="town"
+                :rules="[v => !!v || 'Town is required']"
+                :items="towns"
+                label="Town"
+              ></v-select>
+            </v-row>
+            </v-form>
+          <button class="button-search" @click="getDetails">search</button>
         </el-card>
         <el-card shadow="hover" class="table-card">
                 <span v-if="!showTable">Image here</span>
@@ -80,7 +118,9 @@
                 placeholder="Describe your need and emergency" 
                 style="width:50%;margin-left:10px;">
                 </el-input>
-                <button v-if="optionalFlag" class="button" style="margin-left:312px" @click="clickSubmit">SUBMIT</button>
+                <div v-if="optionalFlag"><br></div>
+                <button v-if="optionalFlag" class="button-search" style="margin-left:40%" @click="clickSubmit">SUBMIT</button>
+                <div v-if="optionalFlag"><br></div>
             <table id="firstTable">
                 <thead>
                     <tr>
@@ -106,7 +146,120 @@
             </table>
                 </div>
         </el-card>
+         <v-row justify="center">
+  </v-row>
+  <v-dialog
+        v-model="profileDialog"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+        scrollable
+      >
+        <v-card tile>
+          <v-toolbar
+            flat
+            class="headline grey lighten-2"
+
+          >
+            <v-toolbar-title style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 30px;font-weight: 500;">USER PROFILE</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+              <v-btn
+                dark
+                text
+                @click="dialog = false"
+                style="color:black"
+              >
+                Save
+              </v-btn>
+            </v-toolbar-items>
+            <v-btn
+              icon
+              dark
+              @click="profileDialog = false"
+              style="color:black"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-toolbar>
+          <v-card-text>
+            <v-btn
+              color="primary"
+              dark
+              class="ma-2"
+              @click="dialog2 = !dialog2"
+            >
+              Open Dialog 2
+            </v-btn>
+            <v-tooltip right>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class="ma-2"
+                  v-bind="attrs"
+                  v-on="on"
+                >Tool Tip Activator</v-btn>
+              </template>
+              Tool Tip
+            </v-tooltip>
+            <v-list
+              three-line
+              subheader
+            >
+              <v-subheader>User Controls</v-subheader>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Content filtering</v-list-item-title>
+                  <v-list-item-subtitle>Set the content filtering level to restrict apps that can be downloaded</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Password</v-list-item-title>
+                  <v-list-item-subtitle>Require password for purchase or use password to restrict purchase</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+            <v-divider></v-divider>
+            <v-list
+              three-line
+              subheader
+            >
+              <v-subheader>General</v-subheader>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-checkbox v-model="notifications"></v-checkbox>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>Notifications</v-list-item-title>
+                  <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-checkbox v-model="sound"></v-checkbox>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>Sound</v-list-item-title>
+                  <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-checkbox v-model="widgets"></v-checkbox>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>Auto-add widgets</v-list-item-title>
+                  <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card-text>
+
+          <div style="flex: 1 1 auto;"></div>
+        </v-card>
+      </v-dialog>
     </div>
+</v-app>
 </template>
 
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -122,20 +275,47 @@ import Factory from '../libs/factory.js'
 export default {
     data () {
         return {
+            profileDialog : false,
+            items: [
+                { title: 'Profile',
+                  icon: 'fa fa-user'
+
+                },
+                { title: 'Settings',
+                  icon : 'fa fa-gear'
+                },
+                { title: 'Contact Us',
+                  icon : 'fa fa-address-book'
+                },
+                { title: 'Logout',
+                  icon : 'fa fa-sign-out'
+                },
+
+            ],
+            styleColorhome : 'font-size:36px;color:black;cursor:pointer',
+            styleColorcheck : 'font-size:36px;color:black;cursor:pointer',
+            styleColorcoin : 'font-size:36px;color:black;cursor:pointer',
+            showHome: false,
+            showCheck: false,
+            showCoin: false,
+            showUser: false,
+            effect: 'lni-tada-effect',
+            stateDisable : true, 
+            districtDisable : true,
+            cityDisable : true,
+            townDisable : true,
+            bloodgroup:'',
+            town:'',
+            city:'',
+            district:'',
+            state:'',
+            country:'',
             showTable : false,
             optionalFlag : false,
             messageText : '',
             textarea : '',
             visible : false,
             rows: [],
-            fieldData : {
-                bloodgroup:'',
-                town:'',
-                city:'',
-                district:'',
-                state:'',
-                country:'',
-            },
             countries : '',
             states : '',
             districts : '',
@@ -152,7 +332,6 @@ export default {
     async created () {
         this.getCountries()
         this.getBloodgroupList()
-        console.log(this.$store.state.userData)
         this.$store.state.userName = localStorage.getItem('username')
         
     },
@@ -160,8 +339,7 @@ export default {
     },
     methods : {
         async requestDonor (row,index) {
-            console.log(row,index)
-            this.requestPayload.to = row.mailid
+            this.requestPayload.mailid = row.mailid
             this.requestPayload.message = this.messageText
             let _response = await Factory.PostService('http://35.238.212.200:8080/sendmailtodonor',this.requestPayload)
             if (_response.data.status) {
@@ -173,23 +351,23 @@ export default {
                 this.sentFlag[index] = true
                 flagArray[index] = this.sentFlag[index]
                 this.sentFlag = flagArray
-                console.log(this.sentFlag[index], index)
             }
         },
         clickSubmit () {
           this.optionalFlag = false
+          Message.success('We will deliver your message to all the requested contacts!')
         },
         optionalMessage () {
           this.optionalFlag = true
         },
         async getCountries () {
 
-            let _data = await Factory.getService('http://35.238.212.200:8080/getcountrieslist')
-            this.countries = _data.data.country
+            let _data = await Factory.getService('http://35.238.212.200:8080/getlist/countries')
+            this.countries = _data.data.countriesList.country
         },
         async getBloodgroupList () {
-            let _data = await Factory.getService('http://35.238.212.200:8080/getbloodgroupslist')
-            this.options = _data.data.blood_group
+            let _data = await Factory.getService('http://35.238.212.200:8080/getlist/bloodgroups')
+            this.options = _data.data.bloodGroupsList.blood_group
         },
         changeCountry () {
             this.getStates()
@@ -197,51 +375,72 @@ export default {
             this.fieldData.district = ''
             this.fieldData.city = ''
             this.fieldData.town = ''
+            this.stateDisable = false
         },
         async getStates () {
-            let country_payload  = {}
-            country_payload.country = this.fieldData.country
-            let _data = await Factory.PostService('http://35.238.212.200:8080/getstateslist',country_payload)
-            this.states = _data.data.states
+        let _data = await Factory.getService('http://35.238.212.200:8080/getlist/states?country=' + this.country)
+        this.states = _data.data.statesList.states
         },
         changeState () {
             this.getDistricts()
             this.fieldData.district = ''
             this.fieldData.city = ''
             this.fieldData.town = ''
+            this.districtDisable = false
         },
         async getDistricts () {
-            let state_payload  = {}
-            state_payload.state = this.fieldData.state
-            let _data = await Factory.PostService('http://35.238.212.200:8080/getdistrictslist',state_payload)
-            this.districts = _data.data.districts
+            let _data = await Factory.getService('http://35.238.212.200:8080/getlist/districts?state=' + this.state)
+            this.districts = _data.data.districtsList.districts
         },
         changeDistrict () {
             this.getCities()
             this.fieldData.city = ''
             this.fieldData.town = ''
+            this.cityDisable = false
         },
         async getCities () {
-            let district_payload  = {}
-            district_payload.district = this.fieldData.district
-            let _data = await Factory.PostService('http://35.238.212.200:8080/getcitieslist',district_payload)
-            this.cities = _data.data.city
+            let _data = await Factory.getService('http://35.238.212.200:8080/getlist/cities?district=' + this.district)
+            this.cities = _data.data.citiesList.city
         },
         changeCity() {
             this.getTowns()
             this.fieldData.town = ''
+            this.townDisable = false
         },
         async getTowns () {
-            let town_payload  = {}
-            town_payload.city = this.fieldData.city
-            let _data = await Factory.PostService('http://35.238.212.200:8080/gettownslist',town_payload)
-            this.towns = _data.data.town
+            let _data = await Factory.getService('http://35.238.212.200:8080/getlist/towns?city=' + this.city)
+            this.towns = _data.data.townsList.town
         },
         async getDetails () {
-            let _data = await Factory.getService('http://35.238.212.200:8080/getdetails/' + this.fieldData.country + '/' + this.fieldData.state + '/' + this.fieldData.district + '/' + this.fieldData.city + '/' + this.fieldData.town + '/' + this.fieldData.bloodgroup)
-            console.log(_data)
-            this.rows = _data.data
+            let _data = await Factory.getService('http://35.238.212.200:8080/getdonors/available?' + 'country=' + this.country + '&state=' + this.state + '&district=' + this.district + '&city=' + this.city + '&town=' + this.town + '&bloodgroup=O%2B')
+            this.rows = _data.data.donorsList
             this.showTable = true
+        },
+        changeColorhome () {
+            this.styleColorhome = 'font-size:36px;color:blue;cursor:pointer'
+        },
+        removeColorhome () {
+            this.styleColorhome = 'font-size:36px;color:black;cursor:pointer'
+        },
+        changeColorcheck () {
+            this.styleColorcheck = 'font-size:36px;color:blue;cursor:pointer'
+        },
+        removeColorcheck () {
+            this.styleColorcheck = 'font-size:36px;color:black;cursor:pointer'
+        },
+        changeColorcoin () {
+            this.styleColorcoin = 'font-size:36px;color:blue;cursor:pointer'
+        },
+        removeColorcoin () {
+            this.styleColorcoin = 'font-size:36px;color:black;cursor:pointer'
+        },
+        clickItem (item,index) {
+            if (item.title == 'Profile') {
+                this.profileDialog = true
+            }
+        },
+        gotohome () {
+            this.$router.push('/')
         }
         
     }
@@ -249,22 +448,22 @@ export default {
 </script>
 
 <style>
-.el-form-item.label-text {
+.el-form-item.label-texting {
     margin-bottom: 10px;
 }
 .table-card {
     width: 70%;
     position: absolute;
     right: 15px;
-    top: 100px;
+    top: 15%;
 }
 .field-card {
     width: 20%;
     position: absolute;
     left: 15px;
-    top: 100px;
+    top: 15%;
 }
- .label-text .el-form-item__label {
+ .label-texting .el-form-item__label {
     text-align: right;
     vertical-align: middle;
     float: left;
@@ -275,8 +474,10 @@ export default {
     padding: 0 0 0 0;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    position: relative;
+    top: 10px;
 }
-.button {
+.button-search {
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
@@ -296,18 +497,18 @@ export default {
   height: 3px;
   margin-left: 55px;
 }
-.button:hover {
+.button-search:hover {
   background: #fff;
   color: #000;
 }
-.button:active:after {
+.button-search:active:after {
   padding: 0;
   margin: 0;
   opacity: 1;
   transition: 0s
 }
-.button:focus { outline:0; }
-.button:focus { outline:0; }
+.button-search:focus { outline:0; }
+.button-search:focus { outline:0; }
 table {
   font-family: 'Open Sans', sans-serif;
   width: 100%;
@@ -365,5 +566,123 @@ table tbody tr:nth-child(2n) td {
 .width-style .el-input__inner{
    height: 30px;
 }
+.label-texting .el-form-item__content {
+    height: 60px;
+}
+.navbar{ 
+  position: relative;
+  z-index:99 !important; 
+  width: 100%;
+  height: 70px;
+  background-color: FFF;
+  color: #FFF;  
+  border-radius:10px;
+  display: flex;
+  box-shadow: 0.1px 0.1px 10px 0.1px #092574;
+}
+#home{
+  color: black;
+  position:absolute;
+  right: 58.3%;
+  margin-left: 0;
+  margin-top: 2px;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+#check{
+  position:absolute;
+  right: 50.3%;  
+  margin-left: 0;
+  margin-top: 2px;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+#coin{
+  position:absolute;
+  right: 43%;  
+  margin-left: 0;
+  margin-top: 2px;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+#user{
+  position:absolute;
+  right: 5%;    
+  margin-left: 0;
+  margin-top: 5px;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+#dropdowns{
+  position:absolute;
+  right: 3%;    
+  margin-top: 15px;
+  cursor: pointer;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+.colum{
+  display: flex;
+  width: 95%;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.home{
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.logo{
+  width: 20%;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+#logo {
+ width:10%;
+ max-height: 80%;
+  position:absolute;
+  left:0%;    
+  cursor: pointer;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s; 
+}
+.check{
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.coin{
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.user{   
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.dropdowns{   
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.clicked{
+  width: 100px;
+  height: 34px;
+  background-color: #feca57;
+  border-radius: 10px;
+  transition: background-color 0.3s, border-radius 0.5s, width 0.5s;
+}
+.main-content {
+    position: relative;
+}
+
+
 
 </style>

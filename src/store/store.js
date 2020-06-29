@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 const state = {
    userName : 'LOGIN/SIGNUP',
-   userData : ''
+   userData : '',
+   dropdownFlag :  false
    
 }
 

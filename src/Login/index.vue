@@ -1,7 +1,45 @@
 <template>
+<v-app>
       <div id="app">
+      <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">    
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://cdn.lineicons.com/1.0.1/LineIcons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="app">
+  <div class="navbar">
+    <div class="colum">
+        <div class="logo">
+           <img src="../assets/dnm.png" alt="img" id="logo" @click="gotohome"> 
+        </div>
+        <div class="home" >
+          <i class="fa fa-home" @mouseover="changeColorhome" @mouseleave="removeColorhome" v-bind:style=styleColorhome id="home"></i>
+          <h4 style="margin-top: 8px; color: black;position:absolute;bottom:0%;right:58%;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 15px;font-weight: 400;"> HOME </h4>
+        </div>
+
+      <div class="check">
+        <i class="fa fa-question-circle" @mouseover="changeColorcheck" @mouseleave="removeColorcheck" v-bind:style=styleColorcheck id="check"></i>
+         <h4 style="margin-top: 8px; color: black;position:absolute;bottom:0%;right:50%;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 15px;font-weight: 400;"> ABOUT </h4>
+      </div>
+
+      <div class="coin" >
+        <i class="fa fa-thumbs-up" @mouseover="changeColorcoin" @mouseleave="removeColorcoin" v-bind:style=styleColorcoin id="coin"></i>
+         <h4 style="margin-top: 8px; color: black;position:absolute;bottom:0%;right:43%;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 15px;font-weight: 400;">HELP </h4>
+      </div>
+      
+      <div class="user" >
+        <i class="fa fa-user" style="font-size:36px;color:black" id="user"></i>
+        <h4 style="margin-top: 10px; color: black;position:absolute;right:9%;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 18px;font-weight: 400;">LOGIN/SIGNUP </h4>
+      </div>
+    </div>
+  </div>
+</div>  
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
       <div id="tabs" class="container">
 
     <div class="tabs">
@@ -11,107 +49,90 @@
 
     <div class="content">
         <div v-if="activetab ==='1'" class="tabcontent">
-            <el-form :model="signupForm" :rules="ruleValidate" ref="signupForm">
-              <el-form-item label="Full Name" prop="username" class="label-text">
-                <el-input v-model="signupForm.username" placeholder="Name Surname" size="medium"></el-input>
-              </el-form-item>
-              <el-form-item label="Email ID" prop="mailid" class="label-text">
-                <el-input v-model="signupForm.mailid" type="email" @input="changeMailid" placeholder="email@example.com" size="medium"></el-input>
-              </el-form-item>
-              <el-form-item label="Password" prop="password" class="label-text">
-                <el-input v-model="signupForm.password" :type="inputType" placeholder="Enter password" size="medium">
-                  <i
-                 slot="suffix"
-                 @click="navigatePassword"
-                 v-if="inputType == 'password'"
-                 class="el-icon-view"
-                 style="cursor:pointer"
-                 aria-hidden="true"
-                 ></i>
-                 <i
-                 slot="suffix"
-                 @click="navigatePassword"
-                 v-if="inputType == 'text'"
-                 class="el-icon-view"
-                 style="cursor:pointer"
-                 aria-hidden="true"
-                 ></i>
-                </el-input>
-              </el-form-item>
-              <el-form-item label="Mobile Number" prop="phonenumber" class="label-text">
-                <el-input v-model="signupForm.phonenumber" type="number" placeholder="+91 XXXXXXXXXX" size="medium"></el-input>
-              </el-form-item>
-              <br>
-              <el-form-item label="Blood Group:" prop="bloodgroup" class="label-text">
-                <el-select v-model="signupForm.bloodgroup" placeholder="Your blood group is" style="width:100%">
-                  <el-option
-                    v-for="item in options"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="Country" prop="country" class="label-text">
-                <el-select v-model="signupForm.country" filterable @change="changeCountry" placeholder="Select Country" style="width:100%">
-                  <el-option
-                    v-for="item in countries"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="State" prop="state" class="label-text">
-                <el-select v-model="signupForm.state" filterable @change="changeState" placeholder="Select State" style="width:100%">
-                  <el-option
-                    v-for="item in states"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="District" prop="district" class="label-text">
-                <el-select v-model="signupForm.district" filterable @change="changeDistrict" placeholder="Select district" style="width:100%">
-                  <el-option
-                    v-for="item in districts"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="City" prop="city" class="label-text">
-                <el-select v-model="signupForm.city" filterable @change="changeCity" placeholder="Select City" style="width:100%">
-                  <el-option
-                    v-for="item in cities"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="Town" prop="town" class="label-text">
-                <el-select v-model="signupForm.town" filterable placeholder="Select Town" style="width:100%">
-                  <el-option
-                    v-for="item in towns"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="Pincode" prop="pincode" class="label-text">
-                <el-input v-model="signupForm.pincode" placeholder="Enter Pincode" size="medium"></el-input>
-              </el-form-item>
-              <el-form-item label="Receive notifications through:" class="label-text">
-                <br>
-                <el-checkbox v-model="mail_notification" @change="changemail"><span style="color:black;font-size: 15px;">Email</span></el-checkbox><br>
-                <el-checkbox v-model="sms_notification" @change="changesms"><span style="color:black;font-size: 15px;">SMS</span></el-checkbox>
-              </el-form-item>
-
-            </el-form>
+            <v-form
+            ref="signupForm"
+          >
+            <v-row align="center">
+            <v-text-field
+              v-model="username"
+              :counter="15"
+              :rules="nameRules"
+              label="Full Name"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="mailid"
+              :rules="emailRules"
+              label="Email ID"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="password"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :passwordRules="[passwordRules.required, passwordRules.min]"
+              :type="show1 ? 'text' : 'password'"
+              name="input-10-1"
+              label="Password"
+              hint="At least 8 characters"
+              counter
+              @click:append="show1 = !show1"
+            ></v-text-field>
+            <v-text-field
+              v-model="phonenumber"
+              :rules="mobileRules"
+              label="Mobile Number"
+              type="number"
+              required
+            ></v-text-field>
+                <v-select
+                  v-model="bloodgroup"
+                  :items="options"
+                  :rules="[v => !!v || 'Bloodgroup is required']"
+                  label="Blood Group"
+                >
+                </v-select>
+                <v-select
+                v-model="country"
+                :items="countries"
+                :rules="[v => !!v || 'Country is required']"
+                label="Country"
+                @change="changeCountry"
+              ></v-select>
+              <v-select
+                v-model="state"
+                :items="states"
+                :disabled="stateDisable"
+                :rules="[v => !!v || 'State is required']"
+                label="State"
+                @change="changeState"
+              ></v-select>
+               <v-select
+                v-model="district"
+                :items="districts"
+                :disabled="districtDisable"
+                :rules="[v => !!v || 'District is required']"
+                label="District"
+                @change="changeDistrict"
+              ></v-select>
+              <v-select
+                v-model="city"
+                :items="cities"
+                :disabled="cityDisable"
+                :rules="[v => !!v || 'City is required']"
+                label="City"
+                @change="changeCity"
+              ></v-select>
+              <v-select
+                v-model="town"
+                :rules="[v => !!v || 'Town is required']"
+                :items="towns"
+                :disabled="townDisable"
+                label="Town"
+              ></v-select>
+              <v-switch v-model="mail_notification" @change="changemail" class="ma-2" label="Email Alerts" ></v-switch>
+              <v-switch v-model="sms_notification" @change="changesms" class="ma-2" label="SMS Alerts" ></v-switch>
+            </v-row>
+            </v-form>
             <button class="button" @click="sendOtp">Verify</button>
         </div>
         <div v-if="activetab ==='2'" class="tabcontent">
@@ -120,7 +141,7 @@
                 <el-col :span="5">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-                    <i class="material-icons" style="font-size:50px;color:red;margin-top:12px;margin-left:17px">error_outline</i>
+                    <i class="material-icons" style="font-size:50px;color:red;margin-top:12px;margin-left:5px">error_outline</i>
                 </el-col> 
                 <el-col :span="18">
                     <p class="warning-message">There was a problem.</p>
@@ -129,31 +150,30 @@
               </el-row>
             </div>
             <div v-if="signinWarning"><br><br></div>
-          <el-form :model="signinForm" :rules="signinValidate" ref="signinForm">
-            <el-form-item label="Email ID" prop="email" class="label-text">
-              <el-input v-model="signinForm.email" placeholder="email@example.com" size="medium"></el-input>
-            </el-form-item>
-            <el-form-item label="Password" prop="password" class="label-text">
-                <el-input v-model="signinForm.password" :type="inputTypes" placeholder="Enter password" size="medium">
-                  <i
-                 slot="suffix"
-                 @click="navigatePasswords"
-                 v-if="inputTypes == 'password'"
-                 class="el-icon-view"
-                 style="cursor:pointer"
-                 aria-hidden="true"
-                 ></i>
-                 <i
-                 slot="suffix"
-                 @click="navigatePasswords"
-                 v-if="inputTypes == 'text'"
-                 class="el-icon-view"
-                 style="cursor:pointer"
-                 aria-hidden="true"
-                 ></i>
-                </el-input>
-              </el-form-item>
-          </el-form>
+            <v-form
+            ref="signinForm"
+          >
+            <v-row align="center">
+              <v-text-field
+              v-model="signinmailid"
+              :rules="emailRules"
+              label="Email ID"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="signpassword"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :passwordRules="[passwordRules.required, passwordRules.min]"
+              :type="show1 ? 'text' : 'password'"
+              name="input-10-1"
+              label="Password"
+              hint="At least 8 characters"
+              counter
+              @click:append="show1 = !show1"
+            ></v-text-field>
+            
+            </v-row>
+            </v-form>
           <button class="button" @click="gotoPage">login</button><br><br><br>
           <span slot="prefix" style="color:black;font-size:16px;font-weight:600;cursor:pointer"><u>Forgot Password?</u></span>
           <span slot="suffix" style="float:right">
@@ -165,33 +185,52 @@
     </div>
   
 </div>
-  <el-dialog
-    :visible.sync="centerDialogVisible"
-    @close="closeDialog"
-    width="40%"
-    class="dialog">
-    <div class="span-box">
-    <div v-if="handleChange">  
-      <span class="msg-dialog">Enter the 6 digit OTP that is sent on your Email Id!</span><br><br>
-    <div style="margin-left:30px">
-    <v-otp-input
-      inputClasses="otp-input"
-      :numInputs="6"
-       separator="-"
-      :shouldAutoFocus="true"
-      @on-complete="handleOnComplete"
-      @on-change="handleOnChange"
-    />
+    <div class="text-center">
+    <v-dialog
+      v-model="dialog"
+      max-width="44%"
+    >
+      <v-card>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+          style="font-size:12px"
+        >
+         Enter the 6 digit OTP that is sent on your Email ID!
+        </v-card-title>
+
+        <v-card-text>
+        <div style="margin-left:80px;margin-top:30px" v-if="handleChange">
+          <v-otp-input
+            inputClasses="otp-input"
+            :numInputs="6"
+            separator="-"
+            :shouldAutoFocus="true"
+            @on-complete="handleOnComplete"
+            @on-change="handleOnChange"
+          />
+        </div>
+        <div class="checkmark" v-if="!handleChange"></div><br><br>
+        <span v-if="!handleChange" style="color:#78b13f;margin-left:15%;font-size:16px;font-weight:bold">Your Email has been successfully verified!</span>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            text
+            @click="addUser"
+          >
+            submit
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
-    </div>
-    <div class="checkmark" v-if="!handleChange"></div><br><br>
-    <span v-if="!handleChange" style="color:#78b13f;margin-left:15%;font-size:16px;font-weight:bold">Your Email has been successfully verified!</span>
-    </div><br><br>
-    <button class="button" style="float:right" @click="addUser">submit</button>
-    <span slot="footer" class="dialog-footer">
-    </span>
-  </el-dialog>
   </div>
+</v-app>
 </template>
 
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -209,15 +248,42 @@ Vue.component("v-otp-input", OtpInput)
 export default {
   data () {
     return {
+            styleColorhome : 'font-size:36px;color:black;cursor:pointer',
+            styleColorcheck : 'font-size:36px;color:black;cursor:pointer',
+            styleColorcoin : 'font-size:36px;color:black;cursor:pointer',
+            showHome: false,
+            showCheck: false,
+            showCoin: false,
+            showUser: false,
+            effect: 'lni-tada-effect', 
+     signinmailid : '',
+     signpassword : '', 
+     dialog:false, 
+     stateDisable : true, 
+     districtDisable : true,
+     cityDisable : true,
+     townDisable : true,
+     show1: false,
+     password : 'Password', 
      signinWarning :false,   
      display_message : '',
      options : '',
      handleChange : true,
-     inputType : 'password',
      inputTypes : 'password',
      emailValidation : '',
      input: '',
      activetab: '1',
+      mailid : '',
+      username:'',
+      phonenumber:'',
+      bloodgroup:'',
+      town:'',
+      city:'',
+      district:'',
+      state:'',
+      country:'',
+      password:'',
+      pincode: '',
      signupForm : {
        mailid : '',
        username:'',
@@ -235,60 +301,26 @@ export default {
      },
      mail_notification : false,
      sms_notification : false,
-     signinForm : {
-       email : '',
-       password : ''
-     },
         countries : '',
         states : '',
         districts : '',
         cities : '',
         towns : '',
-        centerDialogVisible: false,  
-        ruleValidate :{
-          username : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          mailid : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          password : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          phonenumber : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          bloodgroup : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          country : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          state : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          district : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          city : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          town : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          pincode : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
+        nameRules: [
+          v => !!v || 'Name is required',
+          v => (v && v.length <= 15) || 'Name must be less than 15 characters',
+        ],
+        emailRules: [
+          v => !!v || 'E-mail is required',
+          v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        ],
+       passwordRules: {
+          required: value => !!value || 'Password is required',
+          min: v => v.length >= 8 || 'Min 8 characters',
         },
-        signinValidate : {
-          email : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ],
-          password : [
-            { required: true, message: 'This field is required', trigger: 'change' }
-          ]
-        }
-        
+        mobileRules : [
+           v => !!v || 'Mobile number is required',
+        ],     
     }
   },
   async created () {
@@ -310,10 +342,23 @@ export default {
     closeDialog () {
     },
     async getBloodgroupList () {
-      let _data = await Factory.getService('http://35.238.212.200:8080/getbloodgroupslist')
-      this.options = _data.data.blood_group
+      let _data = await Factory.getService('http://35.238.212.200:8080/getlist/bloodgroups')
+      this.options = _data.data.bloodGroupsList.blood_group
     },
     async addUser () {
+       this.signupForm.mailid = this.mailid
+       this.signupForm.username = this.username
+       this.signupForm.phonenumber = this.phonenumber
+       this.signupForm.bloodgroup = this.bloodgroup
+       this.signupForm.town = this.town
+       this.signupForm.city = this.city
+       this.signupForm.district = this.district
+       this.signupForm.state = this.state
+       this.signupForm.country = this.country
+       this.signupForm.password = this.password
+       this.signupForm.pincode = this.pincode
+       this.signupForm.mail_notification = this.mail_notification
+       this.signupForm.sms_notification = this.sms_notification
       let _data = await Factory.PostService('http://35.238.212.200:8080/addUser',this.signupForm)
         if (_data.data.error) {
           Message.error(_data.data.error)
@@ -321,12 +366,12 @@ export default {
         }
         this.activetab = '2'
         this.clearForm()
-        this.centerDialogVisible = false
+        this.dialog = false
     },
     async handleOnComplete (value) {
       var validate_email_payload = {}
       validate_email_payload.otp = value
-      validate_email_payload.mailid = this.signupForm.mailid
+      validate_email_payload.mailid = this.mailid
       let _response = await Factory.PostService('http://35.238.212.200:8080/validateotp',validate_email_payload)
       if (_response.data.error) {
          Message.error(_response.data.error)
@@ -335,16 +380,6 @@ export default {
       this.handleChange = false
     },
     handleOnChange (value) {
-      console.log('poiu')
-
-    },
-    navigatePassword () {
-    if (this.inputType === 'password') {
-      this.inputType = 'text'
-    }
-    else {
-      this.inputType = 'password'
-    }
     },
     navigatePasswords () {
     if (this.inputTypes === 'password') {
@@ -355,26 +390,26 @@ export default {
     }
     },
     async sendOtp () {
-      this.$refs.signupForm.validate(async valid => {
-        if (valid) {
+      this.$refs.signupForm.validate()
+
+      if (this.$refs.signupForm.validate()) {
         let otp_payload = {}
-        otp_payload.mailid = this.signupForm.mailid
+        otp_payload.mailid = this.mailid
         const _response = await Factory.PostService('http://35.238.212.200:8080/sendotp',otp_payload)
         if (_response.data.error) {
               Message.error(_response.data.error)
               return false
             }
-        this.centerDialogVisible = true
-        }
-      })
+        this.dialog = true
+      } 
     }, 
-    gotoPage () {
-      this.$refs.signinForm.validate(async valid => {
-        if (valid) {
-          var authenticate_payload = {}
-          authenticate_payload.mailid = this.signinForm.email
-          authenticate_payload.password = this.signinForm.password
-
+    async gotoPage () {
+      this.$refs.signinForm.validate()
+      if (this.$refs.signinForm.validate()) {
+         debugger
+         var authenticate_payload = {}
+          authenticate_payload.mailid = this.signinmailid
+          authenticate_payload.password = this.signpassword
           var _data = await Factory.PostService('http://35.238.212.200:8080/authenticate',authenticate_payload)
           if (_data.data.error) {
               this.display_message = _data.data.error
@@ -384,11 +419,12 @@ export default {
           if (_data.data.status) {
             localStorage.setItem('email_id',_data.data.mailid)
             localStorage.setItem('username',_data.data.username)
-            this.clearSigninForm()  
-            this.$router.push('/infopage')
+            this.$store.state.dropdownFlag = true
+            localStorage.setItem('dropdownflag',this.$store.state.dropdownFlag)
           }
-        }
-      })  
+          this.clearSigninForm()  
+          this.$router.push('/infopage')
+      }
 
     },
     changesms () {
@@ -399,79 +435,101 @@ export default {
     },
     async getCountries () {
 
-      let _data = await Factory.getService('http://35.238.212.200:8080/getcountrieslist')
-      this.countries = _data.data.country
+      let _data = await Factory.getService('http://35.238.212.200:8080/getlist/countries')
+      this.countries = _data.data.countriesList.country
     },
     changeCountry () {
       this.getStates()
-      this.signupForm.state= ''
-      this.signupForm.district = ''
-      this.signupForm.city = ''
-      this.signupForm.town = ''
+      this.state= ''
+      this.district = ''
+      this.city = ''
+      this.town = ''
+      this.stateDisable = false
     },
     async getStates () {
-      let country_payload  = {}
-      country_payload.country = this.signupForm.country
-      let _data = await Factory.PostService('http://35.238.212.200:8080/getstateslist',country_payload)
-      this.states = _data.data.states
+      let _data = await Factory.getService('http://35.238.212.200:8080/getlist/states?country=' + this.country)
+      this.states = _data.data.statesList.states
     },
 
     changeState () {
       this.getDistricts()
-      this.signupForm.district = ''
-      this.signupForm.city = ''
-      this.signupForm.town = ''
+      this.district = ''
+      this.city = ''
+      this.town = ''
+      this.districtDisable = false
     },
     async getDistricts () {
-      let state_payload  = {}
-      state_payload.state = this.signupForm.state
-      let _data = await Factory.PostService('http://35.238.212.200:8080/getdistrictslist',state_payload)
-      this.districts = _data.data.districts
+      let _data = await Factory.getService('http://35.238.212.200:8080/getlist/districts?state=' + this.state)
+      this.districts = _data.data.districtsList.districts
     },
     changeDistrict () {
       this.getCities()
-      this.signupForm.city = ''
-      this.signupForm.town = ''
+      this.city = ''
+      this.town = ''
+      this.cityDisable = false
     },
     async getCities () {
-      let district_payload  = {}
-      district_payload.district = this.signupForm.district
-      let _data = await Factory.PostService('http://35.238.212.200:8080/getcitieslist',district_payload)
-      this.cities = _data.data.city
+      let _data = await Factory.getService('http://35.238.212.200:8080/getlist/cities?district=' + this.district)
+      this.cities = _data.data.citiesList.city
     },
     changeCity() {
       this.getTowns()
-      this.signupForm.town = ''
+      this.town = ''
+      this.townDisable = false
     },
     async getTowns () {
-      let town_payload  = {}
-      town_payload.city = this.signupForm.city
-      let _data = await Factory.PostService('http://35.238.212.200:8080/gettownslist',town_payload)
-      this.towns = _data.data.town
+      let _data = await Factory.getService('http://35.238.212.200:8080/getlist/towns?city=' + this.city)
+      this.towns = _data.data.townsList.town
     },
     clearSigninForm () {
-      this.signinForm.email = ''
-      this.signinForm.password = ''
+      this.signinmailid = ''
+      this.signpassword = ''
       this.signinWarning = false
     },
     clearForm () {
-      this.$refs.signupForm.resetFields()  
-      this.signupForm.username = ''
-      this.signupForm.mailid = ''
-      this.signupForm.password = ''
-      this.signupForm.phonenumber = ''
-      this.signupForm.bloodgroup= ''
-      this.signupForm.country = ''
-      this.signupForm.state = ''
-      this.signupForm.district = ''
-      this.signupForm.city = ''
-      this.signupForm.town = ''
-      this.signupForm.pincode = ''
+      this.username = ''
+      this.mailid = ''
+      this.password = ''
+      this.phonenumber = ''
+      this.bloodgroup= ''
+      this.country = ''
+      this.state = ''
+      this.district = ''
+      this.city = ''
+      this.town = ''
+      this.pincode = ''
       this.mail_notification = false
       this.sms_notification = false
       this.handleChange = true
-    }
-
+      this.stateDisable = true
+      this.districtDisable = true
+      this.cityDisable = true
+      this.townDisable = true
+    },
+    changeColorhome () {
+            this.styleColorhome = 'font-size:36px;color:blue;cursor:pointer'
+        },
+        removeColorhome () {
+            this.styleColorhome = 'font-size:36px;color:black;cursor:pointer'
+        },
+        changeColorcheck () {
+            this.styleColorcheck = 'font-size:36px;color:blue;cursor:pointer'
+        },
+        removeColorcheck () {
+            this.styleColorcheck = 'font-size:36px;color:black;cursor:pointer'
+        },
+        changeColorcoin () {
+            this.styleColorcoin = 'font-size:36px;color:blue;cursor:pointer'
+        },
+        removeColorcoin () {
+            this.styleColorcoin = 'font-size:36px;color:black;cursor:pointer'
+        },
+        clickItem (index) {
+            console.log('qwe')
+        },
+        gotohome () {
+            this.$router.push('/')
+        }
   },
   name: 'App'
 }
@@ -548,6 +606,7 @@ export default {
   font-size: 15px;
   letter-spacing: 4px;
   position: relative;
+  left: 25%;
   background-color: black;
   border: none;
   color: #fff;
@@ -559,7 +618,6 @@ export default {
   overflow: hidden;
   border-radius: 4px;
   height: 3px;
-  margin-left: 125px;
 }
 .button:hover {
   background: #fff;
@@ -598,12 +656,11 @@ export default {
 }
 .button:focus { outline:0; }
 .container { 
+  overflow: hidden;
   position: absolute;
   top:8%;
-  right:5%;
-  left:60%;
-  max-width: 620px; 
-  min-width: 420px;
+  left:67%;
+  width:30%;
   margin: 40px auto;
   font-family: "Nunito Sans", Arial, Helvetica, sans-serif;
   font-size: 0.9em;
@@ -665,7 +722,7 @@ export default {
   border-radius: 10px;
 }
 .data { width: 120px; }
-#app,html {
+/* #app,html {
   display: flex;
   align-items: center;
   justify-content: center;  
@@ -678,7 +735,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .otp-input {
   width: 40px;
@@ -694,7 +751,7 @@ export default {
   border: 1px solid red !important;
 }
 .warning-password {
-  width: 375px;
+  width: 100%;
   height: 75px;
   border: 2px solid;
   -moz-box-shadow:    inset 0 0 2px #000000;
@@ -705,13 +762,128 @@ export default {
     color: red;
     font-weight: 500;
     font-size: 20px;
-    margin-top: 8px;
+    margin-top: 2px;
 }
 .display-message {
     font-size: 16px;
     color: black;
     font-weight: 700;
     margin-left:20px;
-    
+    position: relative;
+    top: -5%;
 }
+.navbar{ 
+  position: relative;
+  z-index:99 !important; 
+  width: 100%;
+  height: 70px;
+  background-color: FFF;
+  color: #FFF;  
+  border-radius:10px;
+  display: flex;
+  box-shadow: 0.1px 0.1px 10px 0.1px #092574;
+}
+#home{
+  color: black;
+  position:absolute;
+  right: 58.3%;
+  margin-left: 0;
+  margin-top: 2px;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+#check{
+  position:absolute;
+  right: 50.3%;  
+  margin-left: 0;
+  margin-top: 2px;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+#coin{
+  position:absolute;
+  right: 43%;  
+  margin-left: 0;
+  margin-top: 2px;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+#user{
+  position:absolute;
+  right: 5%;    
+  margin-left: 0;
+  margin-top: 5px;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+#dropdowns{
+  position:absolute;
+  right: 3%;    
+  margin-top: 15px;
+  cursor: pointer;
+  color: #ffff;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+}
+.colum{
+  display: flex;
+  width: 95%;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.home{
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.logo{
+  width: 20%;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+#logo {
+ width:10%;
+ max-height: 80%;
+  position:absolute;
+  left:0%;    
+  cursor: pointer;
+  transition: width 0.5s, background-color 0.5s, border-radius 0.5s; 
+}
+.check{
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.coin{
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.user{   
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.dropdowns{   
+  width: 80px;
+  height: 34px;
+  margin-left: 20px;
+  display: flex;
+}
+.clicked{
+  width: 100px;
+  height: 34px;
+  background-color: #feca57;
+  border-radius: 10px;
+  transition: background-color 0.3s, border-radius 0.5s, width 0.5s;
+}
+.main-content {
+    position: relative;
+}
+
 </style>

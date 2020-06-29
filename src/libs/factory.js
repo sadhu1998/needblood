@@ -7,7 +7,7 @@ export default {
         return axios({
             url:endPoint,
             method:'POST',
-            headers : {'Content-type':'text/plain'},
+            headers : {'Content-type':'application/json'},
             data: payload
         }).then(function(response) {
             if (response.data.status) {                             
