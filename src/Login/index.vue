@@ -406,7 +406,6 @@ export default {
     async gotoPage () {
       this.$refs.signinForm.validate()
       if (this.$refs.signinForm.validate()) {
-         debugger
          var authenticate_payload = {}
           authenticate_payload.mailid = this.signinmailid
           authenticate_payload.password = this.signpassword
@@ -423,7 +422,7 @@ export default {
             localStorage.setItem('dropdownflag',this.$store.state.dropdownFlag)
           }
           this.clearSigninForm()  
-          this.$router.push('/infopage')
+          this.$router.push({path: '/infopage',query : {id:_data.data.mailid}})
       }
 
     },

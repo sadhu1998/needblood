@@ -4,12 +4,12 @@
         <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
         <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
         <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-<link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">    
-<meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="https://cdn.lineicons.com/1.0.1/LineIcons.min.css">
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">    
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="https://cdn.lineicons.com/1.0.1/LineIcons.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div id="app">
   <div class="navbar">
     <div class="colum">
@@ -158,21 +158,11 @@
         <v-card tile>
           <v-toolbar
             flat
-            class="headline grey lighten-2"
-
+            style="height:70px;"
           >
-            <v-toolbar-title style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 30px;font-weight: 500;">USER PROFILE</v-toolbar-title>
+            <img src="../assets/dnm.png" alt="img" id="logo" @click="profileDialog = false"> 
+            <v-toolbar-title style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 30px;font-weight: 500;position:absolute;left:43%">USER PROFILE</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items>
-              <v-btn
-                dark
-                text
-                @click="dialog = false"
-                style="color:black"
-              >
-                Save
-              </v-btn>
-            </v-toolbar-items>
             <v-btn
               icon
               dark
@@ -182,82 +172,234 @@
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </v-toolbar>
-          <v-card-text>
+                 <v-card-text>
+                   <v-card style="position:absolute;top:10%;left:0%;right:85%;background-color:rgba(0,0,0,.06);padding:20px;height:90%">
+                    <div style="position:absolute;top:20%">
+                      <i class="fa fa-facebook-square" style="font-size:36px" aria-hidden="true"></i><span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size:20px;font-weight:500;">/Donor Nearme</span><br><br><br>
+                      <i class="fa fa-twitter" style="font-size:36px" aria-hidden="true"></i><span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size:20px;font-weight:500;">/donor_nearme</span><br><br><br>
+                      <i class="fa fa-instagram" style="font-size:36px" aria-hidden="true"></i><span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size:20px;font-weight:500;">/donornearme</span><br><br><br>
+                      <i class="fa fa-whatsapp" style="font-size:36px"  aria-hidden="true"></i><span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size:19px;font-weight:500;">/919874563210</span><br><br><br>
+                    </div>
+                  </v-card>
+                  <div style="position:absolute;top:13%;left:18%;right:3%;background-color:#fafbfc;padding:30px;bottom:2%">
+                  <br><br><br>  
+                  <v-row>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;left:12%"
+                      v-model="profilename"
+                      label="Name"
+                    ></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;left:45%"
+                      v-model="profilebloodgroup"
+                      label="Blood Group"
+                    ></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;right:12%"
+                      v-model="profiledistrict"
+                      label="District"
+                    ></v-text-field>
+                    </v-col>
+                  </v-row><br><br><br>
+                  <v-row>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;left:12%"
+                      v-model="profilemailid"
+                      label="Email"
+                    ></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;left:45%"
+                      v-model="profilecountry"
+                      label="Country"
+                    ></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;right:12%"
+                      v-model="profilecity"
+                      label="City"
+                    ></v-text-field>
+                    </v-col>
+                  </v-row><br><br><br>
+                  <v-row>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;left:12%"
+                      v-model="profilemobile"
+                      label="Mobile Number"
+                    ></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;left:45%"
+                      v-model="profilestate"
+                      label="State"
+                    ></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                      style="position:absolute;right:12%"
+                      v-model="profiletown"
+                      label="Town"
+                    ></v-text-field>
+                    </v-col>
+                  </v-row><br><br><br>
+
+                  <v-btn style="margin-left:450px" @click="updateUserProfile">Save</v-btn>
+                  </div>
+                 </v-card-text>
+          <div style="flex: 1 1 auto;"></div>
+        </v-card>
+      </v-dialog>
+      <v-dialog
+        v-model="contactusDialog"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+        scrollable
+      >
+        <v-card tile>
+          <v-toolbar
+            flat
+          >
+            <img src="../assets/dnm.png" alt="img" id="logo" @click="contactusDialog = false"> 
+            <v-toolbar-title style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 30px;font-weight: 500;position:absolute;left:43%">CONTACT US</v-toolbar-title>
+            <v-spacer></v-spacer>
             <v-btn
-              color="primary"
+              icon
               dark
-              class="ma-2"
-              @click="dialog2 = !dialog2"
+              @click="contactusDialog = false"
+              style="background-color:#808080"
             >
-              Open Dialog 2
+              <v-icon>mdi-close</v-icon>
             </v-btn>
-            <v-tooltip right>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  class="ma-2"
-                  v-bind="attrs"
-                  v-on="on"
-                >Tool Tip Activator</v-btn>
-              </template>
-              Tool Tip
-            </v-tooltip>
-            <v-list
-              three-line
-              subheader
-            >
-              <v-subheader>User Controls</v-subheader>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>Content filtering</v-list-item-title>
-                  <v-list-item-subtitle>Set the content filtering level to restrict apps that can be downloaded</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>Password</v-list-item-title>
-                  <v-list-item-subtitle>Require password for purchase or use password to restrict purchase</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-            <v-divider></v-divider>
-            <v-list
-              three-line
-              subheader
-            >
-              <v-subheader>General</v-subheader>
-              <v-list-item>
-                <v-list-item-action>
-                  <v-checkbox v-model="notifications"></v-checkbox>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title>Notifications</v-list-item-title>
-                  <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-action>
-                  <v-checkbox v-model="sound"></v-checkbox>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title>Sound</v-list-item-title>
-                  <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-action>
-                  <v-checkbox v-model="widgets"></v-checkbox>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title>Auto-add widgets</v-list-item-title>
-                  <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
+          </v-toolbar>
+          <v-card-text>
+                  <v-card style="position:absolute;top:10%;left:0%;right:85%;background-color:rgba(0,0,0,.06);padding:20px;height:90%">
+                    <div style="position:absolute;top:20%">
+                      <i class="fa fa-facebook-square" style="font-size:36px" aria-hidden="true"></i><span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size:20px;font-weight:500;">/Donor Nearme</span><br><br><br>
+                      <i class="fa fa-twitter" style="font-size:36px" aria-hidden="true"></i><span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size:20px;font-weight:500;">/donor_nearme</span><br><br><br>
+                      <i class="fa fa-instagram" style="font-size:36px" aria-hidden="true"></i><span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size:20px;font-weight:500;">/donornearme</span><br><br><br>
+                      <i class="fa fa-whatsapp" style="font-size:36px"  aria-hidden="true"></i><span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size:19px;font-weight:500;">/919874563210</span><br><br><br>
+                    </div>
+                  </v-card>
+                  <div style="position:absolute;top:13%;left:18%;right:40%;background-color:#fafbfc;padding:30px;bottom:2%">
+                  <span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 30px;font-weight: 500;">Having queries? Let us know!</span><br><br><br><br>
+                  <v-row>
+                    <v-col sm="12" cols="24">
+                       <v-text-field filled v-model="QuerySubject" label="Subject"></v-text-field><br>
+                       <v-textarea
+                        filled
+                        auto-grow
+                        label="Concern"
+                        rows="4"
+                        row-height="30"
+                        v-model="QueryConcern"
+                      ></v-textarea><br>
+                      <v-btn style="margin-left:38%">Submit</v-btn>
+                    </v-col>
+                  </v-row>
+                  </div>
+                  <div style="position:absolute;top:13%;background-color:#fafbfc;padding:32px;right:3%;left:63%;bottom:2%">
+                     <span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 30px;font-weight: 500;position:absolute;left:10%">Want to talk in person?</span><br>
+                     <span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 30px;font-weight: 500;margin-left:25px;">Let us contact you!</span><br><br>
+                     <v-text-field
+                    label="Mobile Number"
+                    rows="1"
+                    prepend-icon="mdi-cellphone"
+                  ></v-text-field>
+                  <v-text-field
+                    label="Email"
+                    rows="1"
+                    prepend-icon="mdi-email"
+                  ></v-text-field>
+                  <v-btn style="margin-left:34%">Submit</v-btn><br><br><br>
+                  <span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 22px;font-weight: 500;margin-left:40%">(OR)</span><br><br><br>
+                  <span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 20px;font-weight: 500;text-decoration:underline">Write to us at:</span><br>
+                  <v-text-field
+                    rows="1"
+                    prepend-icon="mdi-email"
+                    readonly=""
+                    v-model="EmailText"
+                  ></v-text-field>
+                  </div>
           </v-card-text>
 
           <div style="flex: 1 1 auto;"></div>
         </v-card>
       </v-dialog>
+       <v-dialog
+      v-model="ratingDialog"
+      max-width="44%"
+    >
+      <v-card>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+          style="font-size:12px"
+        >
+         Please rate our service!
+        </v-card-title>
+
+        <v-card-text>
+          <div >
+                     <v-rating
+                      style="margin-left:120px"
+                      v-model="rating"
+                      :length="length"
+                      :empty-icon="emptyIcon"
+                      :full-icon="fullIcon"
+                      :half-icon="halfIcon"
+                      :half-increments="halfIncrements"
+                      :hover="hover"
+                      :readonly="readonly"
+                      :size="size"
+                      :dense="dense"
+                      :color="color"
+                      :background-color="bgColor"
+                      @input="changeColorRating(rating)"
+                    ></v-rating><br>
+                    <div v-if="toprating">
+                      <i class="fa fa-smile-o" style="font-size:80px;color: green;margin-left:42%" aria-hidden="true"></i><br>
+                      <span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 25px;font-weight: 500;margin-left:120px;color:green">Thankyou for your feedback!</span><br>
+                    </div>
+                    <div v-if="avgrating">
+                      <span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 25px;font-weight: 500;margin-left:120px;">Thankyou for your feedback!</span><br><br><br>
+                       <v-textarea
+                        filled
+                        auto-grow
+                        label="Tell us the aspects where we can improve"
+                        rows="4"
+                        row-height="30"
+                        v-model="avgReview"
+                      ></v-textarea><br>
+                    </div>
+                    <div v-if="lowrating">
+                      <i class="fa fa-frown-o" style="font-size:80px;color:orange;margin-left:42%" aria-hidden="true"></i><br>
+                      <span style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 22px;font-weight: 500;margin-left:120px;">We are sorry to hear this from you!</span><br><br><br>
+                       <v-textarea
+                        filled
+                        auto-grow
+                        label="Tell us where it went wrong!"
+                        rows="4"
+                        row-height="30"
+                        v-model="lowReview"
+                      ></v-textarea><br>
+                    </div><br>
+                    <v-btn style="margin-left:80%">Logout</v-btn>
+                  </div>
+
+        </v-card-text>
+      </v-card>
+       </v-dialog>
     </div>
 </v-app>
 </template>
@@ -275,7 +417,37 @@ import Factory from '../libs/factory.js'
 export default {
     data () {
         return {
+            ratingDialog : false,
+            avgrating : false,
+            toprating : false,
+            lowrating : false,
+            emptyIcon: 'mdi-star-outline',
+            fullIcon: 'mdi-star',
+            halfIcon: 'mdi-star-half-full',
+            halfIncrements: true,
+            hover: true,
+            length: 5,
+            rating: 0,
+            readonly: false,
+            size: 40,
+            dense: false,
+            color: 'grey lighten-1',
+            bgColor: 'grey lighten-1',
+            EmailText : 'donornearme@gmail.com',
+            QueryConcern : '',
+            QuerySubject : '',
+            userID : '',
+            profiletown : '',
+            profilestate : '',
+            profilemobile : '',
+            profilecity : '',
+            profilecountry : '',
+            profilemailid : '', 
+            profiledistrict : '',
+            profilename : '', 
+            profilebloodgroup : '',
             profileDialog : false,
+            contactusDialog : false,
             items: [
                 { title: 'Profile',
                   icon: 'fa fa-user'
@@ -290,7 +462,6 @@ export default {
                 { title: 'Logout',
                   icon : 'fa fa-sign-out'
                 },
-
             ],
             styleColorhome : 'font-size:36px;color:black;cursor:pointer',
             styleColorcheck : 'font-size:36px;color:black;cursor:pointer',
@@ -333,11 +504,52 @@ export default {
         this.getCountries()
         this.getBloodgroupList()
         this.$store.state.userName = localStorage.getItem('username')
-        
+        console.log(this.$route.query.id)
+        this.userID = this.$route.query.id
+        this.getDetailsUser()
     },
     async mounted () {
     },
     methods : {
+       changeColorRating (value) {
+         this.avgrating = false
+         this.toprating = false
+         this.lowrating = false
+         this.adaptcolor(value*20,0,130)
+         this.color = this.adaptcolor(value*20,0,130)
+         if (value == 5 || value == 4.5) {
+           this.toprating = true
+         }
+         if (value >= 2.5 && value <=4) {
+           this.avgrating = true
+         }
+         else if (value>=0 && value <= 2){
+           this.lowrating = true
+         }
+       },
+       adaptcolor (percent, start, end) {
+      var a = percent / 100,
+          b = (end - start) * a,
+          c = b + start;
+
+      return 'hsl('+c+', 100%, 50%)';
+    },
+       async updateUserProfile () {
+        this.profileDialog = false
+       },
+       async getDetailsUser () {
+         let _data = await Factory.getService('http://35.238.212.200:8080/getdetails/user?mailid=' + this.userID)
+         let getData = _data.data.userDetails[0]
+            this.profiletown = getData.town
+            this.profilestate = getData.state
+            this.profilemobile = getData.phonenumber
+            this.profilecity = getData.city
+            this.profilecountry = getData.country
+            this.profilemailid = getData.mailid
+            this.profiledistrict = getData.district
+            this.profilename = getData.username
+            this.profilebloodgroup = getData.bloodgroup
+       },
         async requestDonor (row,index) {
             this.requestPayload.mailid = row.mailid
             this.requestPayload.message = this.messageText
@@ -437,6 +649,13 @@ export default {
         clickItem (item,index) {
             if (item.title == 'Profile') {
                 this.profileDialog = true
+            }
+
+            if (item.title == 'Contact Us') {
+              this.contactusDialog = true
+            }
+            if (item.title == 'Logout') {
+              this.ratingDialog = true
             }
         },
         gotohome () {
@@ -681,6 +900,10 @@ table tbody tr:nth-child(2n) td {
 }
 .main-content {
     position: relative;
+}
+.v-toolbar__content {
+  z-index:99;
+  box-shadow: 0.1px 0.1px 10px 0.1px #092574;
 }
 
 
